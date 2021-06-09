@@ -49,7 +49,7 @@ const LoginPage = ({ history }) => {
       <span>Password:</span>
       <input
         value={password}
-        type="text"
+        type="password"
         placeholder="Введите Пароль"
         onChange={passwordChange}
       />

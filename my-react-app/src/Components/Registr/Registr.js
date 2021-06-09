@@ -6,7 +6,7 @@ const Registr = () => {
   return (
     <div>
       <div>
-        <Header headerText="Зарегистрироваться в системе" />
+        <Header headerText="Зарегистрироваться в баре 'Голубая Устрица'" />
         <Main />
       </div>
     </div>

@@ -5,7 +5,7 @@ import Main from "../Main/Main";
 const Login = () => {
   return (
     <div>
-      <Header headerText="Войти в систему" />
+      <Header headerText="Войти в бар 'Голубая Устрица'" />
       <Main />
     </div>
   );

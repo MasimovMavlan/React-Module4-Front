@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-const RegistrPage = ({ history }) => {
+const RegistrPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const isDisabled = !login || !password || !repeatPassword;
   const regEx1 = /^[0-9a-zA-Z]+$/;
   const regEx2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  const history = useHistory();
 
   const loginChange = (e) => {
     setLogin(e.target.value.trim());
@@ -30,19 +31,10 @@ const RegistrPage = ({ history }) => {
       })
       .then((res) => {
         alert(res.data.message);
+        history.push("/login");
       })
       .catch((e) => {
         alert("Такой Логин уже занят, попробуйте другой");
-      })
-      .then((res) => {
-        axios
-          .post("http://localhost:5000/login", {
-            user: login,
-            password: password,
-          })
-          .then(() => {
-            history.push("/home");
-          });
       });
   };
 

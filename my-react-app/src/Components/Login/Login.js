@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import LoginPage from "../LoginPage/LoginPage";
 
 const Login = () => {
   return (
     <div>
       <Header headerText="Войти в бар 'Голубая Устрица'" />
-      <Main />
+      <LoginPage />
     </div>
   );
 };

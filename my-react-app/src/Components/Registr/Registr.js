@@ -1,14 +1,12 @@
 import React from "react";
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import RegistrPage from "../RegistrPage/RegistrPage";
 
 const Registr = () => {
   return (
     <div>
-      <div>
-        <Header headerText="Зарегистрироваться в баре 'Голубая Устрица'" />
-        <Main />
-      </div>
+      <Header headerText="Зарегистрироваться в баре 'Голубая Устрица'" />
+      <RegistrPage />
     </div>
   );
 };

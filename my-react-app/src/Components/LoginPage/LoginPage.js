@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-const LoginPage = ({ history }) => {
+const LoginPage = () => {
+  const history = useHistory();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const isDisabled = !login || !password;
@@ -15,6 +16,8 @@ const LoginPage = ({ history }) => {
       })
       .then((res) => {
         alert(res.data.message);
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         history.push("/home");
       })
       .catch((e) => {

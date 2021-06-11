@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const LoginPage = () => {
   const history = useHistory();
@@ -43,22 +45,24 @@ const LoginPage = () => {
     <div>
       <h2>Войти в систему</h2>
       <span>Login:</span>
-      <input
+      <TextField
+        variant="outlined"
         value={login}
         type="text"
         placeholder="Введите Логин"
         onChange={loginChange}
       />
       <span>Password:</span>
-      <input
+      <TextField
+        variant="outlined"
         value={password}
         type="password"
         placeholder="Введите Пароль"
         onChange={passwordChange}
       />
-      <button disabled={isDisabled} onClick={clickSubmit}>
+      <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
         Войти
-      </button>
+      </Button>
       <Link to="/registr">Регистрация</Link>
     </div>
   );

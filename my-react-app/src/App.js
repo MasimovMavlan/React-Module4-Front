@@ -8,7 +8,6 @@ function App() {
   const isLoggedIn = () => {
     return localStorage.getItem("user");
   };
-  console.log(isLoggedIn());
 
   return (
     <div className="App">
@@ -24,7 +23,16 @@ function App() {
           }}
         />
 
-        <Route path="/registr" component={Registr} />
+        <Route
+          path="/registr"
+          render={() => {
+            return !isLoggedIn() ? (
+              <Registr />
+            ) : (
+              <Redirect from="/registr" to="/home" />
+            );
+          }}
+        />
 
         <Route
           path="/home"
@@ -36,8 +44,7 @@ function App() {
             );
           }}
         />
-
-        <Redirect from="/" to="/registr" />
+        <Redirect from="/" to="/home" />
         <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
     </div>

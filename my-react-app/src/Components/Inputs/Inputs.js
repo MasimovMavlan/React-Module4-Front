@@ -1,5 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const Inputs = ({ setNote }) => {
   const [patient, setName] = useState("");
@@ -25,26 +31,8 @@ const Inputs = ({ setNote }) => {
     }
   };
 
-  // const removeAllTasks = async () => {
-  //   await axios.delete("http://localhost:8000/deleteAllTasks").then((res) => {
-  //     setNote(res.data.data);
-  //   });
-  // };
-
-  const nameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const doctorChange = (e) => {
-    setDoctor(e.target.value);
-  };
-
-  const dateChange = (e) => {
-    setDate(e.target.value);
-  };
-
-  const vineChange = (e) => {
-    setVine(e.target.value);
+  const handleChange = (e, changeValue) => {
+    changeValue(e.target.value);
   };
 
   // const inputKeyPress = (e) => {
@@ -63,19 +51,46 @@ const Inputs = ({ setNote }) => {
 
   return (
     <div>
-      <input type="text" onChange={nameChange} value={patient} />
-      <select value={doctor} onChange={doctorChange}>
-        <option hidden defaultValue>
+      <TextField
+        variant="outlined"
+        type="text"
+        onChange={(e) => handleChange(e, setName)}
+        value={patient}
+      />
+      <FormControl variant="filled" className="">
+        <InputLabel id="demo-simple-select-filled-label">
           Выберете врача
-        </option>
-        <option>Педрони Эмилио</option>
-        <option>Хуанито Петрунио</option>
-      </select>
-      <input type="date" onChange={dateChange} value={date} />
-      <input type="text" onChange={vineChange} value={vine} />
-      <button disabled={isDisabled} onClick={clickSubmit}>
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          value={doctor}
+          onChange={(e) => handleChange(e, setDoctor)}
+        >
+          <MenuItem value="">
+            <em>Выберете врача</em>
+          </MenuItem>
+          <MenuItem value={1}>Педрони Эмилио</MenuItem>
+          <MenuItem value={2}>Хуанито Петрунио</MenuItem>
+          <MenuItem value={3}>Эбанито Фернандес</MenuItem>
+        </Select>
+      </FormControl>
+
+      <TextField
+        variant="outlined"
+        type="date"
+        onChange={(e) => handleChange(e, setDate)}
+        value={date}
+      />
+      <TextField
+        variant="outlined"
+        type="text"
+        onChange={(e) => handleChange(e, setVine)}
+        value={vine}
+      />
+      <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
         Добавить
-      </button>
+      </Button>
     </div>
   );
 };

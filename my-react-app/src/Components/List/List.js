@@ -138,9 +138,9 @@ const List = ({ note, setNote }) => {
               <MenuItem value="">
                 <em>Выберете врача</em>
               </MenuItem>
-              <MenuItem value={1}>Педрони Эмилио</MenuItem>
-              <MenuItem value={2}>Хуанито Петрунио</MenuItem>
-              <MenuItem value={3}>Эбанито Фернандес</MenuItem>
+              <MenuItem value="Педрони Эмилио">Педрони Эмилио</MenuItem>
+              <MenuItem value="Хуанито Петрунио">Хуанито Петрунио</MenuItem>
+              <MenuItem value="Эбанито Фернандес">Эбанито Фернандес</MenuItem>
             </Select>
           </FormControl>
 

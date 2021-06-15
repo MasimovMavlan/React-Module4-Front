@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import "./RegistrPage.scss";
 
 const RegistrPage = () => {
   const [login, setLogin] = useState("");
@@ -30,7 +33,6 @@ const RegistrPage = () => {
         password: password,
       })
       .then((res) => {
-        alert(res.data.message);
         history.push("/login");
       })
       .catch((e) => {
@@ -61,34 +63,52 @@ const RegistrPage = () => {
     }
   };
 
+  const registrEnter = (e) => {
+    if (e.key === "Enter") {
+      clickSubmit();
+    }
+  };
+
   return (
-    <div>
+    <div className="RegistrPage">
       <h2>Регистрация</h2>
-      <span>Login:</span>
-      <input
+      <span className="textForInput">Login:</span>
+      <TextField
+        variant="outlined"
         value={login}
         type="text"
         placeholder="Введите Логин"
-        onChange={loginChange}
+        onChange={(e) => loginChange(e)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <span>Password:</span>
-      <input
+      <span className="textForInput">Password:</span>
+      <TextField
+        variant="outlined"
         value={password}
         type="password"
         placeholder="Введите Пароль"
-        onChange={passwordChange}
+        onChange={(e) => passwordChange(e)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <span>Repeat password:</span>
-      <input
+      <span className="textForInput">Repeat password:</span>
+      <TextField
+        variant="outlined"
         value={repeatPassword}
         type="password"
         placeholder="Повторите Пароль"
-        onChange={passwordRepeatChange}
+        onChange={(e) => passwordRepeatChange(e)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <button disabled={isDisabled} onClick={clickSubmit}>
-        Зарегистрироваться
-      </button>
-      <Link to="/login">Авторизация</Link>
+      <div className="buttons">
+        <Button
+          variant="contained"
+          disabled={isDisabled}
+          onClick={(e) => clickSubmit(e)}
+        >
+          Зарегистрироваться
+        </Button>
+        <Link to="/login">Авторизация</Link>
+      </div>
     </div>
   );
 };

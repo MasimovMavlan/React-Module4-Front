@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  img {
+    margin-right: 200px;
+  }
+}

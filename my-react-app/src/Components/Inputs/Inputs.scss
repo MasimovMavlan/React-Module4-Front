@@ -1,0 +1,17 @@
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78vw;
+  margin-bottom: 20px;
+  padding: 1vw;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  .MuiFormControl-root {
+    width: 23%;
+    margin: 0 10px;
+  }
+
+  .input-textfield {
+    background-color: #fff;
+  }
+}

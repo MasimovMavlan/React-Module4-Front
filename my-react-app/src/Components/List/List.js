@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,7 +15,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+import "./List.scss";
 
 const List = ({ note, setNote }) => {
   const [tempPatient, setTempPatient] = useState("");
@@ -25,13 +26,6 @@ const List = ({ note, setNote }) => {
   const [open, setOpen] = useState(false);
   const user = localStorage.getItem("user");
   const isDisabled = !tempPatient || !tempDoctor || !tempDate || !tempVine;
-
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
-  const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,9 +107,11 @@ const List = ({ note, setNote }) => {
   // );
 
   return (
-    <div>
+    <div className="list">
       <Modal open={open} onClose={handleClose}>
-        <div className="">
+        <div className="modalEdit">
+          <span>Имя:</span>
+
           <TextField
             variant="outlined"
             type="text"
@@ -124,6 +120,8 @@ const List = ({ note, setNote }) => {
             }}
             value={tempPatient}
           />
+
+          <span>Врач:</span>
 
           <FormControl variant="filled" className="">
             <InputLabel id="demo-simple-select-filled-label">
@@ -144,6 +142,8 @@ const List = ({ note, setNote }) => {
             </Select>
           </FormControl>
 
+          <span>Дата:</span>
+
           <TextField
             variant="outlined"
             type="date"
@@ -153,7 +153,9 @@ const List = ({ note, setNote }) => {
             value={tempDate}
           />
 
-          <TextField
+          <span>Жалоба:</span>
+
+          <TextareaAutosize
             variant="outlined"
             type="text"
             onChange={(e) => {
@@ -164,13 +166,13 @@ const List = ({ note, setNote }) => {
 
           <div className="buttons">
             <Button
+              className="buttons"
               variant="contained"
               disabled={isDisabled}
               onClick={() => doneElement(indexEdit)}
             >
               Сохранить
             </Button>
-
             <Button
               variant="contained"
               onClick={() => cancelElement(indexEdit)}
@@ -181,30 +183,46 @@ const List = ({ note, setNote }) => {
         </div>
       </Modal>
       <TableContainer component={Paper}>
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="a dense table"
-        >
+        <Table>
           <TableHead>
-            <TableRow>
-              <TableCell align="right">Имя</TableCell>
-              <TableCell align="right">Врач</TableCell>
-              <TableCell align="right">Дата(g)</TableCell>
-              <TableCell align="right">Жалоба</TableCell>
-              <TableCell align="right"></TableCell>
+            <TableRow className="table-head">
+              <TableCell className="table-20 table-grey" align="center">
+                Имя
+              </TableCell>
+              <TableCell className="table-20 table-grey" align="center">
+                Врач
+              </TableCell>
+              <TableCell className="table-10 table-grey" align="center">
+                Дата(g)
+              </TableCell>
+              <TableCell className="table-30 table-grey" align="center">
+                Жалоба
+              </TableCell>
+              <TableCell
+                className="table-10 table-grey"
+                align="center"
+              ></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className="table-body">
             {note?.map((list, index) => (
               <TableRow key={`list-${index}`}>
-                <TableCell align="right">{list.patient}</TableCell>
-                <TableCell align="right">{list.doctor}</TableCell>
-                <TableCell align="right">{list.date}</TableCell>
-                <TableCell align="right">{list.vine}</TableCell>
-                <TableCell align="right">
+                <TableCell className="table-20 table-border" align="center">
+                  {list.patient}
+                </TableCell>
+                <TableCell className="table-20 table-border" align="center">
+                  {list.doctor}
+                </TableCell>
+                <TableCell className="table-10 table-border" align="center">
+                  {list.date}
+                </TableCell>
+                <TableCell className="table-40 table-border" align="center">
+                  {list.vine}
+                </TableCell>
+                <TableCell className="table-10 table-border" align="center">
                   <div className="buttons">
                     <Button
+                      className="button-list"
                       variant="contained"
                       onClick={() => removeNote(index)}
                     >
@@ -212,6 +230,7 @@ const List = ({ note, setNote }) => {
                     </Button>
 
                     <Button
+                      className="button-list"
                       variant="contained"
                       onClick={() => editElement(index)}
                     >

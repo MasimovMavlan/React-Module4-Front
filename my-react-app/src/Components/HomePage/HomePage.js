@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import HomeHeader from "../HomeHeader/HomeHeader";
 import List from "../List/List";
 import Inputs from "../Inputs/Inputs";
+import "./HomePage.scss";
 
 const HomePage = () => {
   const [note, setNote] = useState([]);
 
   return (
-    <div>
-      <HomeHeader headerText="Запись на прием в баре 'Голубая Устрица'" />
+    <div className="main-body">
+      <HomeHeader headerText="Приемы" />
       <Inputs note={note} setNote={setNote} />
       <List note={note} setNote={setNote} />
     </div>

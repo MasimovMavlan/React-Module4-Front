@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
+const ModalEdit = ({ note, setNote, openEdit, setOpenEdit }) => {
   const [tempPatient, setTempPatient] = useState("");
   const [tempDoctor, setTempDoctor] = useState("");
   const [tempDate, setTempDate] = useState("");
@@ -47,8 +47,7 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
       .then((res) => {
         setNote(res.data.data);
       });
-    handleClose();
-    setIndexEdit(-1);
+    handleCloseEdit();
   };
 
   const changeTempEdit = (e, setTemp) => {
@@ -56,16 +55,15 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
   };
 
   const cancelElement = () => {
-    handleClose();
-    setIndexEdit(-1);
+    handleCloseEdit();
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={openEdit} onClose={handleCloseEdit}>
       <div className="modalEdit">
         <span>Имя:</span>
         <TextField

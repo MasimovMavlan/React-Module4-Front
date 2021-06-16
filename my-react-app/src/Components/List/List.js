@@ -9,11 +9,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import ModalEdit from "../ModalEdit/ModalEdit";
+import ModalRemove from "../ModalRemove/ModalRemove";
 import "./List.scss";
 
 const List = ({ note, setNote }) => {
   const [indexEdit, setIndexEdit] = useState(-1);
-  const [open, setOpen] = useState(false);
+  const [indexRemove, setIndexRemove] = useState(-1);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openRemove, setOpenRemove] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -30,38 +33,43 @@ const List = ({ note, setNote }) => {
     fetchData();
   }, [setNote, token]);
 
-  const removeNote = async (index) => {
-    await axios
-      .delete(`http://localhost:5000/deleteNote?_id=${note[index]._id}`, {
-        headers: { authorization: token },
-      })
-      .then((res) => {
-        setNote(res.data.data);
-      });
-  };
-
   const editElement = (index) => {
-    handleOpen();
+    handleOpenEdit();
     setIndexEdit(index);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  const removeElement = (index) => {
+    handleOpenRemove();
+    setIndexRemove(index);
   };
 
+  const handleOpenEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleOpenRemove = () => {
+    setOpenRemove(true);
+  };
   // note.sort((a, b) =>
   //   a.isCheck > b.isCheck ? 1 : a.isCheck < b.isCheck ? -1 : 0
   // );
 
   return (
     <div className="list">
-      {open && (
+      {openEdit && (
         <ModalEdit
-          setIndexEdit={setIndexEdit}
           note={note[indexEdit]}
           setNote={setNote}
-          open={open}
-          setOpen={setOpen}
+          openEdit={openEdit}
+          setOpenEdit={setOpenEdit}
+        />
+      )}
+      {openRemove && (
+        <ModalRemove
+          note={note[indexRemove]}
+          setNote={setNote}
+          openRemove={openRemove}
+          setOpenRemove={setOpenRemove}
         />
       )}
       <TableContainer component={Paper}>
@@ -106,7 +114,7 @@ const List = ({ note, setNote }) => {
                     <Button
                       className="button-list"
                       variant="contained"
-                      onClick={() => removeNote(index)}
+                      onClick={() => removeElement(index)}
                     >
                       Удалить
                     </Button>

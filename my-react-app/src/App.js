@@ -6,7 +6,7 @@ import "./App.scss";
 
 function App() {
   const isLoggedIn = () => {
-    return localStorage.getItem("user");
+    return localStorage.getItem("token");
   };
 
   return (

@@ -24,21 +24,22 @@ const List = ({ note, setNote }) => {
   const [tempVine, setTempVine] = useState("");
   const [indexEdit, setIndexEdit] = useState(-1);
   const [open, setOpen] = useState(false);
-  const user = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
   const isDisabled = !tempPatient || !tempDoctor || !tempDate || !tempVine;
 
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .post("http://localhost:5000/getNote", {
-          user: user,
+        .get("http://localhost:5000/getNote", {
+          headers: { authorization: token },
         })
         .then((res) => {
           setNote(res.data.data);
         });
     };
+
     fetchData();
-  }, [setNote, user]);
+  }, [setNote, token]);
 
   const doneElement = async (index) => {
     note[index].patient = tempPatient;
@@ -46,18 +47,23 @@ const List = ({ note, setNote }) => {
     note[index].date = tempDate;
     note[index].vine = tempVine;
     const { _id, patient, doctor, date, vine } = note[index];
+
     await axios
-      .patch(`http://localhost:5000/editNote`, {
-        _id,
-        patient,
-        doctor,
-        date,
-        vine,
-        user: user,
-      })
+      .patch(
+        `http://localhost:5000/editNote`,
+        {
+          _id,
+          patient,
+          doctor,
+          date,
+          vine,
+        },
+        { headers: { authorization: token } }
+      )
       .then((res) => {
         setNote(res.data.data);
       });
+
     setTempPatient("");
     setTempDoctor("");
     setTempDate("");
@@ -68,8 +74,8 @@ const List = ({ note, setNote }) => {
 
   const removeNote = async (index) => {
     await axios
-      .post(`http://localhost:5000/deleteNote?_id=${note[index]._id}`, {
-        user: user,
+      .delete(`http://localhost:5000/deleteNote?_id=${note[index]._id}`, {
+        headers: { authorization: token },
       })
       .then((res) => {
         setNote(res.data.data);
@@ -182,6 +188,7 @@ const List = ({ note, setNote }) => {
           </div>
         </div>
       </Modal>
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -204,6 +211,7 @@ const List = ({ note, setNote }) => {
               ></TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody className="table-body">
             {note?.map((list, index) => (
               <TableRow key={`list-${index}`}>

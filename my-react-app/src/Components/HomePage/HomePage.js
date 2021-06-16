@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import HomeHeader from "../HomeHeader/HomeHeader";
 import List from "../List/List";
 import Inputs from "../Inputs/Inputs";
-import "./HomePage.scss";
 
 const HomePage = () => {
   const [note, setNote] = useState([]);

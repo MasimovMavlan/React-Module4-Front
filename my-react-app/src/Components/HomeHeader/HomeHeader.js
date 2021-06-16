@@ -6,10 +6,12 @@ import "./HomeHeader.scss";
 
 const HomeHeader = ({ headerText }) => {
   const history = useHistory();
+
   const logOut = () => {
     localStorage.clear();
     history.push("/login");
   };
+
   return (
     <div className="home-header">
       <img src={HeaderImg} alt="Logo" />

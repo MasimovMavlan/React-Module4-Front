@@ -18,8 +18,8 @@ const LoginPage = () => {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
+        console.log(res.data.user);
         history.push("/home");
       })
       .catch((e) => {
@@ -50,7 +50,9 @@ const LoginPage = () => {
   return (
     <div className="LoginPage">
       <h2>Войти в систему</h2>
+
       <span className="textForInput">Login:</span>
+
       <TextField
         variant="outlined"
         value={login}
@@ -59,7 +61,9 @@ const LoginPage = () => {
         onChange={(e) => loginChange(e)}
         onKeyDown={(e) => loginEnter(e)}
       />
+
       <span className="textForInput">Password:</span>
+
       <TextField
         variant="outlined"
         value={password}
@@ -68,10 +72,12 @@ const LoginPage = () => {
         onChange={(e) => passwordChange(e)}
         onKeyDown={(e) => loginEnter(e)}
       />
+
       <div className="buttons">
         <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
           Войти
         </Button>
+
         <Link to="/registr">Регистрация</Link>
       </div>
     </div>

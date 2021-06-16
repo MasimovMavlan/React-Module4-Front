@@ -1,11 +1,14 @@
-import Modal from "@material-ui/core/Modal";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Button from "@material-ui/core/Button";
+import {
+  Modal,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  TextField,
+  TextareaAutosize,
+  Button,
+} from "@material-ui/core";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -17,18 +20,18 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
   const isDisabled = !tempPatient || !tempDoctor || !tempDate || !tempVine;
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const onModalOpen = async () => {
-      setTempPatient(note.patient);
-      setTempDoctor(note.doctor);
-      setTempDate(note.date);
-      setTempVine(note.vine);
-    };
+  const onModalOpen = async (value) => {
+    setTempPatient(value.patient);
+    setTempDoctor(value.doctor);
+    setTempDate(value.date);
+    setTempVine(value.vine);
+  };
 
-    onModalOpen();
+  useEffect(() => {
+    onModalOpen(note);
   }, [note]);
 
-  const doneElement = async () => {
+  const handleDoneButton = async () => {
     const { _id } = note;
     await axios
       .patch(
@@ -47,7 +50,7 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
       .then((res) => {
         setNote(res.data.data);
       });
-    handleClose();
+    cancelElement();
     setIndexEdit(-1);
   };
 
@@ -56,16 +59,16 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
   };
 
   const cancelElement = () => {
-    handleClose();
+    handleCancel();
     setIndexEdit(-1);
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleCancel}>
       <div className="modalEdit">
         <span>Имя:</span>
         <TextField
@@ -99,18 +102,14 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
         <TextField
           variant="outlined"
           type="date"
-          onChange={(e) => {
-            changeTempEdit(e, setTempDate);
-          }}
+          onChange={(e) => changeTempEdit(e, setTempDate)}
           value={tempDate}
         />
         <span>Жалоба:</span>
         <TextareaAutosize
           variant="outlined"
           type="text"
-          onChange={(e) => {
-            changeTempEdit(e, setTempVine);
-          }}
+          onChange={(e) => changeTempEdit(e, setTempVine)}
           value={tempVine}
         />
         <div className="buttons">
@@ -118,7 +117,7 @@ const ModalEdit = ({ setIndexEdit, note, setNote, open, setOpen }) => {
             className="buttons"
             variant="contained"
             disabled={isDisabled}
-            onClick={() => doneElement()}
+            onClick={() => handleDoneButton()}
           >
             Сохранить
           </Button>

@@ -39,45 +39,35 @@ const LoginPage = () => {
     }
   };
 
-  const loginChange = (e) => {
-    setLogin(e.target.value);
-  };
-
-  const passwordChange = (e) => {
-    setPassword(e.target.value);
+  const valueChange = (e, value) => {
+    value(e.target.value);
   };
 
   return (
     <div className="LoginPage">
       <h2>Войти в систему</h2>
-
       <span className="textForInput">Login:</span>
-
       <TextField
         variant="outlined"
         value={login}
         type="text"
         placeholder="Введите Логин"
-        onChange={(e) => loginChange(e)}
+        onChange={(e) => valueChange(e, setLogin)}
         onKeyDown={(e) => loginEnter(e)}
       />
-
       <span className="textForInput">Password:</span>
-
       <TextField
         variant="outlined"
         value={password}
         type="password"
         placeholder="Введите Пароль"
-        onChange={(e) => passwordChange(e)}
+        onChange={(e) => valueChange(e, setPassword)}
         onKeyDown={(e) => loginEnter(e)}
       />
-
       <div className="buttons">
         <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
           Войти
         </Button>
-
         <Link to="/registr">Регистрация</Link>
       </div>
     </div>

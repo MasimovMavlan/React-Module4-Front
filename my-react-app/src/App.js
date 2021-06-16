@@ -22,7 +22,6 @@ function App() {
             );
           }}
         />
-
         <Route
           path="/registr"
           render={() => {
@@ -33,7 +32,6 @@ function App() {
             );
           }}
         />
-
         <Route
           path="/home"
           render={() => {

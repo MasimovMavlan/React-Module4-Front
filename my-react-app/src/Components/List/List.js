@@ -117,7 +117,6 @@ const List = ({ note, setNote }) => {
       <Modal open={open} onClose={handleClose}>
         <div className="modalEdit">
           <span>Имя:</span>
-
           <TextField
             variant="outlined"
             type="text"
@@ -126,9 +125,7 @@ const List = ({ note, setNote }) => {
             }}
             value={tempPatient}
           />
-
           <span>Врач:</span>
-
           <FormControl variant="filled" className="">
             <InputLabel id="demo-simple-select-filled-label">
               Выберете врача
@@ -147,9 +144,7 @@ const List = ({ note, setNote }) => {
               <MenuItem value="Эбанито Фернандес">Эбанито Фернандес</MenuItem>
             </Select>
           </FormControl>
-
           <span>Дата:</span>
-
           <TextField
             variant="outlined"
             type="date"
@@ -158,9 +153,7 @@ const List = ({ note, setNote }) => {
             }}
             value={tempDate}
           />
-
           <span>Жалоба:</span>
-
           <TextareaAutosize
             variant="outlined"
             type="text"
@@ -169,7 +162,6 @@ const List = ({ note, setNote }) => {
             }}
             value={tempVine}
           />
-
           <div className="buttons">
             <Button
               className="buttons"
@@ -188,7 +180,6 @@ const List = ({ note, setNote }) => {
           </div>
         </div>
       </Modal>
-
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -211,7 +202,6 @@ const List = ({ note, setNote }) => {
               ></TableCell>
             </TableRow>
           </TableHead>
-
           <TableBody className="table-body">
             {note?.map((list, index) => (
               <TableRow key={`list-${index}`}>
@@ -236,7 +226,6 @@ const List = ({ note, setNote }) => {
                     >
                       Удалить
                     </Button>
-
                     <Button
                       className="button-list"
                       variant="contained"

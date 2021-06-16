@@ -75,7 +75,6 @@ const Inputs = ({ setNote }) => {
           <MenuItem value="Эбанито Фернандес">Эбанито Фернандес</MenuItem>
         </Select>
       </FormControl>
-
       <TextField
         value={date}
         className="input-textfield"
@@ -84,7 +83,6 @@ const Inputs = ({ setNote }) => {
         onChange={(e) => handleChange(e, setDate)}
         onKeyDown={(e) => inputKeyPress(e)}
       />
-
       <TextField
         value={vine}
         className="input-textfield"
@@ -94,7 +92,6 @@ const Inputs = ({ setNote }) => {
         onChange={(e) => handleChange(e, setVine)}
         onKeyDown={(e) => inputKeyPress(e)}
       />
-
       <Button
         variant="contained"
         disabled={isDisabled}

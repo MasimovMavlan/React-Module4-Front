@@ -1,0 +1,83 @@
+.MuiTableContainer-root {
+  margin-top: 30px;
+}
+
+.MuiTableCell-alignRight {
+  width: 23%;
+  word-break: break-all;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  max-height: 70vh;
+  margin: 0;
+  background-color: white;
+}
+
+.table-border.MuiTableCell-root {
+  border-right: 1px solid black;
+  border-bottom: none;
+  vertical-align: middle;
+  word-break: break-all;
+  padding: 10px;
+}
+
+.table-head.MuiTableRow-root {
+  border: 2px solid #c4c4c4;
+  border-bottom: none;
+}
+
+.table-body.MuiTableBody-root {
+  border: 2px solid black;
+}
+
+.MuiTableContainer-root {
+  overflow: scroll;
+  margin: 0;
+}
+
+.table-10 {
+  width: 10%;
+}
+
+.table-20 {
+  width: 20%;
+}
+
+.table-30 {
+  width: 30%;
+}
+
+.table-grey {
+  background-color: #c4c4c4;
+  padding: 15px;
+}
+
+.button-list.MuiButton-contained {
+  margin: 5px;
+  width: 120px;
+}
+
+.modalEdit {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  width: 580px;
+  height: 600px;
+  padding: 30px;
+  top: calc(50% - 300px);
+  left: calc(50% - 290px);
+
+  .MuiFormControl-root {
+    margin: 20px 0;
+  }
+
+  textarea {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 16px;
+    padding: 18.5px 14px;
+  }
+}

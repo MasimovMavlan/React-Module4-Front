@@ -6,7 +6,7 @@ import "./App.scss";
 
 function App() {
   const isLoggedIn = () => {
-    return localStorage.getItem("user");
+    return localStorage.getItem("token");
   };
 
   return (
@@ -22,7 +22,6 @@ function App() {
             );
           }}
         />
-
         <Route
           path="/registr"
           render={() => {
@@ -33,7 +32,6 @@ function App() {
             );
           }}
         />
-
         <Route
           path="/home"
           render={() => {

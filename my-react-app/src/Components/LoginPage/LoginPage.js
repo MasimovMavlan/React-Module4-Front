@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import "./LoginPage.scss";
 
 const LoginPage = () => {
   const history = useHistory();
@@ -17,9 +18,8 @@ const LoginPage = () => {
         password: password,
       })
       .then((res) => {
-        alert(res.data.message);
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
+        console.log(res.data.user);
         history.push("/home");
       })
       .catch((e) => {
@@ -33,37 +33,43 @@ const LoginPage = () => {
     setPassword("");
   };
 
-  const loginChange = (e) => {
-    setLogin(e.target.value);
+  const loginEnter = (e) => {
+    if (e.key === "Enter") {
+      clickSubmit();
+    }
   };
 
-  const passwordChange = (e) => {
-    setPassword(e.target.value);
+  const valueChange = (e, value) => {
+    value(e.target.value);
   };
 
   return (
-    <div>
+    <div className="LoginPage">
       <h2>Войти в систему</h2>
-      <span>Login:</span>
+      <span className="textForInput">Login:</span>
       <TextField
         variant="outlined"
         value={login}
         type="text"
         placeholder="Введите Логин"
-        onChange={loginChange}
+        onChange={(e) => valueChange(e, setLogin)}
+        onKeyDown={(e) => loginEnter(e)}
       />
-      <span>Password:</span>
+      <span className="textForInput">Password:</span>
       <TextField
         variant="outlined"
         value={password}
         type="password"
         placeholder="Введите Пароль"
-        onChange={passwordChange}
+        onChange={(e) => valueChange(e, setPassword)}
+        onKeyDown={(e) => loginEnter(e)}
       />
-      <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
-        Войти
-      </Button>
-      <Link to="/registr">Регистрация</Link>
+      <div className="buttons">
+        <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
+          Войти
+        </Button>
+        <Link to="/registr">Регистрация</Link>
+      </div>
     </div>
   );
 };

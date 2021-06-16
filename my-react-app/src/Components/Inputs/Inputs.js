@@ -6,28 +6,43 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import "./Inputs.scss";
 
 const Inputs = ({ setNote }) => {
+  const today = new Date();
+  const day = `0${today.getDate()}`.slice(-2);
+  const month = `0${today.getMonth() + 1}`.slice(-2);
+  const dat = `${today.getFullYear()}-${month}-${day}`;
+
   const [patient, setName] = useState("");
-  const [doctor, setDoctor] = useState("");
-  const [date, setDate] = useState("");
+  const [doctor, setDoctor] = useState("Педрони Эмилио");
   const [vine, setVine] = useState("");
+  const [date, setDate] = useState(dat);
   const isDisabled = !patient || !doctor || !date || !vine;
-  const user = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
 
   const addList = async (text) => {
-    if (text.trim()) {
+    if (patient.trim() && vine.trim()) {
       await axios
-        .post("http://localhost:5000/createNote", {
-          patient: patient,
-          doctor: doctor,
-          date: date,
-          vine: vine,
-          user: user,
-        })
+        .post(
+          "http://localhost:5000/createNote",
+          {
+            patient: patient,
+            doctor: doctor,
+            date: date,
+            vine: vine,
+          },
+          { headers: { authorization: token } }
+        )
         .then((res) => {
           setNote(res.data.data);
+          setName("");
+          setDoctor("Педрони Эмилио");
+          setDate(dat);
+          setVine("");
         });
+    } else {
+      alert("Заполните все поля");
     }
   };
 
@@ -35,60 +50,53 @@ const Inputs = ({ setNote }) => {
     changeValue(e.target.value);
   };
 
-  // const inputKeyPress = (e) => {
-  //   if (e.key === "Enter") {
-  //     clickSubmit();
-  //   }
-  // };
-
-  const clickSubmit = () => {
-    addList(patient, doctor, date, vine);
-    setName("");
-    setDoctor("");
-    setDate("");
-    setVine("");
+  const inputKeyPress = (e) => {
+    if (e.key === "Enter") {
+      addList();
+    }
   };
 
   return (
-    <div>
+    <div className="inputs">
       <TextField
+        className="input-textfield"
+        label="Имя"
         variant="outlined"
         type="text"
         onChange={(e) => handleChange(e, setName)}
+        onKeyDown={(e) => inputKeyPress(e)}
         value={patient}
       />
-      <FormControl variant="filled" className="">
-        <InputLabel id="demo-simple-select-filled-label">
-          Выберете врача
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          value={doctor}
-          onChange={(e) => handleChange(e, setDoctor)}
-        >
-          <MenuItem value="">
-            <em>Выберете врача</em>
-          </MenuItem>
+      <FormControl variant="filled" className="input-textfield">
+        <InputLabel>Выберете врача</InputLabel>
+        <Select value={doctor} onChange={(e) => handleChange(e, setDoctor)}>
           <MenuItem value="Педрони Эмилио">Педрони Эмилио</MenuItem>
           <MenuItem value="Хуанито Петрунио">Хуанито Петрунио</MenuItem>
           <MenuItem value="Эбанито Фернандес">Эбанито Фернандес</MenuItem>
         </Select>
       </FormControl>
-
       <TextField
+        value={date}
+        className="input-textfield"
         variant="outlined"
         type="date"
         onChange={(e) => handleChange(e, setDate)}
-        value={date}
+        onKeyDown={(e) => inputKeyPress(e)}
       />
       <TextField
+        value={vine}
+        className="input-textfield"
+        label="Жалоба"
         variant="outlined"
         type="text"
         onChange={(e) => handleChange(e, setVine)}
-        value={vine}
+        onKeyDown={(e) => inputKeyPress(e)}
       />
-      <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
+      <Button
+        variant="contained"
+        disabled={isDisabled}
+        onClick={() => addList()}
+      >
         Добавить
       </Button>
     </div>

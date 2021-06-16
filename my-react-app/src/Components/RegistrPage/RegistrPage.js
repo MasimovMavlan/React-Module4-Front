@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import "./RegistrPage.scss";
 
 const RegistrPage = () => {
   const [login, setLogin] = useState("");
@@ -11,16 +14,8 @@ const RegistrPage = () => {
   const regEx2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   const history = useHistory();
 
-  const loginChange = (e) => {
-    setLogin(e.target.value.trim());
-  };
-
-  const passwordChange = (e) => {
-    setPassword(e.target.value.trim());
-  };
-
-  const passwordRepeatChange = (e) => {
-    setRepeatPassword(e.target.value.trim());
+  const valueChange = (e, setValue) => {
+    setValue(e.target.value.trim());
   };
 
   const registrUser = async (login, password) => {
@@ -30,8 +25,8 @@ const RegistrPage = () => {
         password: password,
       })
       .then((res) => {
-        alert(res.data.message);
-        history.push("/login");
+        localStorage.setItem("token", res.data.token);
+        history.push("/home");
       })
       .catch((e) => {
         alert("Такой Логин уже занят, попробуйте другой");
@@ -61,34 +56,52 @@ const RegistrPage = () => {
     }
   };
 
+  const registrEnter = (e) => {
+    if (e.key === "Enter") {
+      clickSubmit();
+    }
+  };
+
   return (
-    <div>
+    <div className="RegistrPage">
       <h2>Регистрация</h2>
-      <span>Login:</span>
-      <input
+      <span className="textForInput">Login:</span>
+      <TextField
+        variant="outlined"
         value={login}
         type="text"
         placeholder="Введите Логин"
-        onChange={loginChange}
+        onChange={(e) => valueChange(e, setLogin)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <span>Password:</span>
-      <input
+      <span className="textForInput">Password:</span>
+      <TextField
+        variant="outlined"
         value={password}
         type="password"
         placeholder="Введите Пароль"
-        onChange={passwordChange}
+        onChange={(e) => valueChange(e, setPassword)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <span>Repeat password:</span>
-      <input
+      <span className="textForInput">Repeat password:</span>
+      <TextField
+        variant="outlined"
         value={repeatPassword}
         type="password"
         placeholder="Повторите Пароль"
-        onChange={passwordRepeatChange}
+        onChange={(e) => valueChange(e, setRepeatPassword)}
+        onKeyDown={(e) => registrEnter(e)}
       />
-      <button disabled={isDisabled} onClick={clickSubmit}>
-        Зарегистрироваться
-      </button>
-      <Link to="/login">Авторизация</Link>
+      <div className="buttons">
+        <Button
+          variant="contained"
+          disabled={isDisabled}
+          onClick={(e) => clickSubmit(e)}
+        >
+          Зарегистрироваться
+        </Button>
+        <Link to="/login">Авторизация</Link>
+      </div>
     </div>
   );
 };

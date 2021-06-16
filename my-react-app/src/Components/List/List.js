@@ -50,6 +50,7 @@ const List = ({ note, setNote }) => {
   const handleOpenRemove = () => {
     setOpenRemove(true);
   };
+
   // note.sort((a, b) =>
   //   a.isCheck > b.isCheck ? 1 : a.isCheck < b.isCheck ? -1 : 0
   // );

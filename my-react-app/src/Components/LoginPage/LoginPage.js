@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Header from "../Header/Header";
+import Logo from "../../img/Logo.png";
 import { TextField, Button } from "@material-ui/core";
 import "./LoginPage.scss";
 
@@ -42,31 +44,41 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="LoginPage">
-      <h2>Войти в систему</h2>
-      <span className="textForInput">Login:</span>
-      <TextField
-        variant="outlined"
-        value={login}
-        type="text"
-        placeholder="Введите Логин"
-        onChange={(e) => valueChange(e, setLogin)}
-        onKeyDown={(e) => loginEnter(e)}
-      />
-      <span className="textForInput">Password:</span>
-      <TextField
-        variant="outlined"
-        value={password}
-        type="password"
-        placeholder="Введите Пароль"
-        onChange={(e) => valueChange(e, setPassword)}
-        onKeyDown={(e) => loginEnter(e)}
-      />
-      <div className="buttons">
-        <Button variant="contained" disabled={isDisabled} onClick={clickSubmit}>
-          Войти
-        </Button>
-        <Link to="/registr">Регистрация</Link>
+    <div className="mainBody">
+      <Header headerText="Войти в систему" />
+      <div className="mainPage">
+        <img src={Logo} alt="Logo" />
+        <div className="AuthPage LoginPage">
+          <h2>Войти в систему</h2>
+          <span className="textForInput">Login:</span>
+          <TextField
+            variant="outlined"
+            value={login}
+            type="text"
+            placeholder="Введите Логин"
+            onChange={(e) => valueChange(e, setLogin)}
+            onKeyDown={(e) => loginEnter(e)}
+          />
+          <span className="textForInput">Password:</span>
+          <TextField
+            variant="outlined"
+            value={password}
+            type="password"
+            placeholder="Введите Пароль"
+            onChange={(e) => valueChange(e, setPassword)}
+            onKeyDown={(e) => loginEnter(e)}
+          />
+          <div className="buttons">
+            <Button
+              variant="outlined"
+              disabled={isDisabled}
+              onClick={clickSubmit}
+            >
+              Войти
+            </Button>
+            <Link to="/registr">Регистрация</Link>
+          </div>
+        </div>
       </div>
     </div>
   );

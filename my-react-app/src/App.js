@@ -1,6 +1,6 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import Login from "./Components/Login/Login";
-import Registr from "./Components/Registr/Registr";
+import LoginPage from "./Components/LoginPage/LoginPage";
+import RegistrPage from "./Components/RegistrPage/RegistrPage";
 import HomePage from "./Components/HomePage/HomePage";
 import "./App.scss";
 
@@ -16,7 +16,7 @@ function App() {
           path="/login"
           render={() => {
             return !isLoggedIn() ? (
-              <Login />
+              <LoginPage />
             ) : (
               <Redirect from="/login" to="/home" />
             );
@@ -26,7 +26,7 @@ function App() {
           path="/registr"
           render={() => {
             return !isLoggedIn() ? (
-              <Registr />
+              <RegistrPage />
             ) : (
               <Redirect from="/registr" to="/home" />
             );

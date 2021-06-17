@@ -84,9 +84,7 @@ const ModalEdit = ({ note, setNote, openEdit, setOpenEdit }) => {
           <TextField
             variant="outlined"
             type="text"
-            onChange={(e) => {
-              changeTempEdit(e, setTempPatient);
-            }}
+            onChange={(e) => changeTempEdit(e, setTempPatient)}
             value={tempPatient}
           />
           <span>Врач:</span>

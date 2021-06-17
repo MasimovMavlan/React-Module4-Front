@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import {
   TextField,
   Button,
@@ -22,27 +23,35 @@ const Inputs = ({ setNote }) => {
   const [date, setDate] = useState(dat);
   const isDisabled = !patient || !doctor || !date || !vine;
   const token = localStorage.getItem("token");
+  const history = useHistory();
 
   const addList = async (text) => {
     if (patient.trim() && vine.trim()) {
-      await axios
-        .post(
-          "http://localhost:5000/createNote",
-          {
-            patient: patient,
-            doctor: doctor,
-            date: date,
-            vine: vine,
-          },
-          { headers: { authorization: token } }
-        )
-        .then((res) => {
-          setNote(res.data.data);
-          setName("");
-          setDoctor("Педрони Эмилио");
-          setDate(dat);
-          setVine("");
-        });
+      try {
+        await axios
+          .post(
+            "http://localhost:5000/createNote",
+            {
+              patient: patient,
+              doctor: doctor,
+              date: date,
+              vine: vine,
+            },
+            { headers: { authorization: token } }
+          )
+          .then((res) => {
+            setNote(res.data.data);
+            setName("");
+            setDoctor("Педрони Эмилио");
+            setDate(dat);
+            setVine("");
+          });
+      } catch (e) {
+        if (e.response.status === 403) {
+          localStorage.clear();
+          history.push("/login");
+        }
+      }
     } else {
       alert("Заполните все поля");
     }

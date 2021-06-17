@@ -64,13 +64,13 @@ const RegistrPage = () => {
   };
 
   return (
-    <div className="mainBody">
+    <div className="main-body">
       <Header headerText="Зарегистрироваться в системе" />
-      <div className="mainPage">
+      <div className="main-page">
         <img src={Logo} alt="Logo" />
-        <div className="AuthPage RegistrPage">
+        <div className="auth-page registr-page">
           <h2>Регистрация</h2>
-          <span className="textForInput">Login:</span>
+          <span className="text-for-input">Login:</span>
           <TextField
             variant="outlined"
             value={login}
@@ -79,7 +79,7 @@ const RegistrPage = () => {
             onChange={(e) => valueChange(e, setLogin)}
             onKeyDown={(e) => registrEnter(e)}
           />
-          <span className="textForInput">Password:</span>
+          <span className="text-for-input">Password:</span>
           <TextField
             variant="outlined"
             value={password}
@@ -88,7 +88,7 @@ const RegistrPage = () => {
             onChange={(e) => valueChange(e, setPassword)}
             onKeyDown={(e) => registrEnter(e)}
           />
-          <span className="textForInput">Repeat password:</span>
+          <span className="text-for-input">Repeat password:</span>
           <TextField
             variant="outlined"
             value={repeatPassword}

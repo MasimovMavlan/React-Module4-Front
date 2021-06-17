@@ -28,7 +28,7 @@ code {
   align-items: center;
 }
 
-.mainPage {
+.main-page {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,10 +38,10 @@ code {
   img {
     height: 375px;
     width: 375px;
-    margin: 3em;
+    margin: 3em 3em 3em 0;
   }
 
-  .AuthPage {
+  .auth-page {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -60,7 +60,7 @@ code {
       line-height: 42px;
     }
 
-    .textForInput {
+    .text-for-input {
       font-size: 18px;
       text-align: left;
       padding-top: 15px;
@@ -83,6 +83,7 @@ code {
       color: #0366d6;
       text-decoration: underline;
     }
+
     a:active {
       color: #498ddb;
     }

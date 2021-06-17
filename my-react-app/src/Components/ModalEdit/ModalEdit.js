@@ -77,7 +77,7 @@ const ModalEdit = ({ note, setNote, openEdit, setOpenEdit }) => {
 
   return (
     <Modal open={openEdit} onClose={handleCloseEdit}>
-      <div className="modalEdit">
+      <div className="modal-edit">
         <h1>Изменить прием</h1>
         <div className="modalEditInputs">
           <span>Имя:</span>

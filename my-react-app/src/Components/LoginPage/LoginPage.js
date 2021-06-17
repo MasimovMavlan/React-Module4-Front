@@ -44,13 +44,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="mainBody">
+    <div className="main-body">
       <Header headerText="Войти в систему" />
-      <div className="mainPage">
+      <div className="main-page">
         <img src={Logo} alt="Logo" />
-        <div className="AuthPage LoginPage">
+        <div className="auth-page login-page">
           <h2>Войти в систему</h2>
-          <span className="textForInput">Login:</span>
+          <span className="text-for-input">Login:</span>
           <TextField
             variant="outlined"
             value={login}
@@ -59,7 +59,7 @@ const LoginPage = () => {
             onChange={(e) => valueChange(e, setLogin)}
             onKeyDown={(e) => loginEnter(e)}
           />
-          <span className="textForInput">Password:</span>
+          <span className="text-for-input">Password:</span>
           <TextField
             variant="outlined"
             value={password}

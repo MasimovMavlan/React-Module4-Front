@@ -1,0 +1,38 @@
+.modalRemove {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  width: 50vw;
+  height: 40vh;
+  left: calc(50% - 25vw);
+  top: calc(50% - 15vh);
+  border-radius: 4px;
+
+  h1 {
+    height: 7vh;
+    padding: 3vh 3vw 1vh;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  h2 {
+    height: 12vh;
+    padding: 4vh 3vw 1vh;
+    font-weight: 300;
+  }
+
+  .buttons {
+    height: 10vh;
+    box-shadow: 0 -2px 2px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1vh;
+
+    button {
+      margin: 5px;
+      width: 146px;
+      height: 40px;
+    }
+  }
+}

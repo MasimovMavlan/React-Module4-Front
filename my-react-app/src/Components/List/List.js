@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ModalEdit from "../ModalEdit/ModalEdit";
 import ModalRemove from "../ModalRemove/ModalRemove";
+import { useHistory } from "react-router";
 import axios from "axios";
 import {
   Button,
@@ -20,9 +21,10 @@ const List = ({ note, setNote }) => {
   const [openEdit, setOpenEdit] = useState(false);
   const [openRemove, setOpenRemove] = useState(false);
   const token = localStorage.getItem("token");
+  const history = useHistory();
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    try {
       await axios
         .get("http://localhost:5000/getNote", {
           headers: { authorization: token },
@@ -30,9 +32,17 @@ const List = ({ note, setNote }) => {
         .then((res) => {
           setNote(res.data.data);
         });
-    };
+    } catch (e) {
+      if (e.response.status === 403) {
+        localStorage.clear();
+        history.push("/login");
+      }
+    }
+  };
 
+  useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setNote, token]);
 
   const editElement = (index) => {
@@ -88,7 +98,7 @@ const List = ({ note, setNote }) => {
               <TableCell className="table-10 table-grey" align="center">
                 Дата(g)
               </TableCell>
-              <TableCell className="table-30 table-grey" align="center">
+              <TableCell className="table-40 table-grey" align="center">
                 Жалоба
               </TableCell>
               <TableCell
@@ -109,7 +119,7 @@ const List = ({ note, setNote }) => {
                 <TableCell className="table-10 table-border" align="center">
                   {list.date}
                 </TableCell>
-                <TableCell className="table-30 table-border" align="center">
+                <TableCell className="table-40 table-border" align="center">
                   {list.vine}
                 </TableCell>
                 <TableCell className="table-10 table-border" align="center">

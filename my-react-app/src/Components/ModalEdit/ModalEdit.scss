@@ -1,0 +1,48 @@
+.modalEdit {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  width: 50vw;
+  height: 70vh;
+  left: calc(50% - 25vw);
+  top: calc(50% - 35vh);
+
+  h1 {
+    height: 7vh;
+    padding: 3vh 3vw 1vh;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  .modalEditInputs {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .MuiFormControl-root {
+    margin: 10px 0;
+  }
+
+  textarea {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin: 10px 0;
+    font-size: 16px;
+    padding: 18.5px 14px;
+  }
+
+  .buttons {
+    height: 10vh;
+    box-shadow: 0 -2px 2px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1vh;
+
+    button {
+      margin: 5px;
+      width: 146px;
+      height: 40px;
+    }
+  }
+}

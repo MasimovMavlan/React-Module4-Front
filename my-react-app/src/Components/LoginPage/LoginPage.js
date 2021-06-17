@@ -18,7 +18,6 @@ const LoginPage = () => {
       })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        console.log(res.data.user);
         history.push("/home");
       })
       .catch((e) => {

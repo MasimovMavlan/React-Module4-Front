@@ -32,7 +32,7 @@ const ModalRemove = ({ openRemove, setOpenRemove, setNote, note }) => {
 
   return (
     <Modal open={openRemove} onClose={handleCloseRemove}>
-      <div className="modalRemove">
+      <div className="modal-remove">
         <h1>Удалить прием</h1>
         <h2>Вы действительно хотите удалить прием?</h2>
         <div className="buttons">

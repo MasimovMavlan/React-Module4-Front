@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Header from "../Header/Header";
+import Logo from "../../img/Logo.png";
 import { TextField, Button } from "@material-ui/core";
 import "./RegistrPage.scss";
 
@@ -62,44 +64,50 @@ const RegistrPage = () => {
   };
 
   return (
-    <div className="RegistrPage">
-      <h2>Регистрация</h2>
-      <span className="textForInput">Login:</span>
-      <TextField
-        variant="outlined"
-        value={login}
-        type="text"
-        placeholder="Введите Логин"
-        onChange={(e) => valueChange(e, setLogin)}
-        onKeyDown={(e) => registrEnter(e)}
-      />
-      <span className="textForInput">Password:</span>
-      <TextField
-        variant="outlined"
-        value={password}
-        type="password"
-        placeholder="Введите Пароль"
-        onChange={(e) => valueChange(e, setPassword)}
-        onKeyDown={(e) => registrEnter(e)}
-      />
-      <span className="textForInput">Repeat password:</span>
-      <TextField
-        variant="outlined"
-        value={repeatPassword}
-        type="password"
-        placeholder="Повторите Пароль"
-        onChange={(e) => valueChange(e, setRepeatPassword)}
-        onKeyDown={(e) => registrEnter(e)}
-      />
-      <div className="buttons">
-        <Button
-          variant="contained"
-          disabled={isDisabled}
-          onClick={(e) => clickSubmit(e)}
-        >
-          Зарегистрироваться
-        </Button>
-        <Link to="/login">Авторизация</Link>
+    <div className="main-body">
+      <Header headerText="Зарегистрироваться в системе" />
+      <div className="main-page">
+        <img src={Logo} alt="Logo" />
+        <div className="auth-page registr-page">
+          <h2>Регистрация</h2>
+          <span className="text-for-input">Login:</span>
+          <TextField
+            variant="outlined"
+            value={login}
+            type="text"
+            placeholder="Введите Логин"
+            onChange={(e) => valueChange(e, setLogin)}
+            onKeyDown={(e) => registrEnter(e)}
+          />
+          <span className="text-for-input">Password:</span>
+          <TextField
+            variant="outlined"
+            value={password}
+            type="password"
+            placeholder="Введите Пароль"
+            onChange={(e) => valueChange(e, setPassword)}
+            onKeyDown={(e) => registrEnter(e)}
+          />
+          <span className="text-for-input">Repeat password:</span>
+          <TextField
+            variant="outlined"
+            value={repeatPassword}
+            type="password"
+            placeholder="Повторите Пароль"
+            onChange={(e) => valueChange(e, setRepeatPassword)}
+            onKeyDown={(e) => registrEnter(e)}
+          />
+          <div className="buttons">
+            <Button
+              variant="outlined"
+              disabled={isDisabled}
+              onClick={(e) => clickSubmit(e)}
+            >
+              Зарегистрироваться
+            </Button>
+            <Link to="/login">Авторизация</Link>
+          </div>
+        </div>
       </div>
     </div>
   );

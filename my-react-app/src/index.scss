@@ -1,6 +1,9 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
 }
 
 body {
@@ -25,7 +28,7 @@ code {
   align-items: center;
 }
 
-.mainPage {
+.main-page {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -35,6 +38,60 @@ code {
   img {
     height: 375px;
     width: 375px;
-    margin: 2em;
+    margin: 3em 3em 3em 0;
+  }
+
+  .auth-page {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    h2 {
+      font-size: 36px;
+      line-height: 42px;
+    }
+
+    .text-for-input {
+      font-size: 18px;
+      text-align: left;
+      padding-top: 15px;
+    }
+
+    button {
+      width: fit-content;
+      margin-bottom: 5px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: inherit;
+    }
+
+    a:hover {
+      color: #0366d6;
+      text-decoration: underline;
+    }
+
+    a:active {
+      color: #498ddb;
+    }
+  }
+
+  @media screen and (max-device-width: 1024px) {
+    img {
+      display: none;
+    }
   }
 }

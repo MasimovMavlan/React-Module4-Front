@@ -26,16 +26,16 @@ const Inputs = ({ sort, sortDirection, sortNotes }) => {
   const history = useHistory();
 
   const addList = async (text) => {
-    if (patient.trim() && vine.trim()) {
+    if (patient.trim() && vine.trim() && date) {
       try {
         await axios
           .post(
             "http://localhost:5000/createNote",
             {
-              patient: patient,
+              patient: patient.trim(),
               doctor: doctor,
               date: date,
-              vine: vine,
+              vine: vine.trim(),
             },
             { headers: { authorization: token } }
           )

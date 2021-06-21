@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import "./List.scss";
 
-const List = ({ note, setNote, sort, sortDirection, sortNotes }) => {
+const List = ({ note, sort, sortDirection, sortNotes }) => {
   const [indexEdit, setIndexEdit] = useState(-1);
   const [indexRemove, setIndexRemove] = useState(-1);
   const [openEdit, setOpenEdit] = useState(false);
@@ -43,7 +43,6 @@ const List = ({ note, setNote, sort, sortDirection, sortNotes }) => {
       {openEdit && (
         <ModalEdit
           note={note[indexEdit]}
-          setNote={setNote}
           openEdit={openEdit}
           setOpenEdit={setOpenEdit}
           sort={sort}
@@ -54,9 +53,9 @@ const List = ({ note, setNote, sort, sortDirection, sortNotes }) => {
       {openRemove && (
         <ModalRemove
           note={note[indexRemove]}
-          setNote={setNote}
           openRemove={openRemove}
           setOpenRemove={setOpenRemove}
+          sortNotes={sortNotes}
         />
       )}
       <TableContainer component={Paper}>

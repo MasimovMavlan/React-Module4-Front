@@ -4,9 +4,10 @@
   position: absolute;
   background-color: white;
   width: 50vw;
-  height: 70vh;
+  min-height: 70vh;
+  height: fit-content;
   left: calc(50% - 25vw);
-  top: calc(50% - 35vh);
+  top: calc(50% - 40vh);
 
   h1 {
     height: 7vh;

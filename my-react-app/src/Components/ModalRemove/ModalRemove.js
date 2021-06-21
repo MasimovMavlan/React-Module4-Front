@@ -4,7 +4,14 @@ import axios from "axios";
 import "./ModalRemove.scss";
 import { useHistory } from "react-router";
 
-const ModalRemove = ({ openRemove, setOpenRemove, setNote, note }) => {
+const ModalRemove = ({
+  openRemove,
+  setOpenRemove,
+  sort,
+  sortDirection,
+  sortNotes,
+  note,
+}) => {
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -19,7 +26,7 @@ const ModalRemove = ({ openRemove, setOpenRemove, setNote, note }) => {
           headers: { authorization: token },
         })
         .then((res) => {
-          setNote(res.data.data);
+          sortNotes(sort, sortDirection, res.data.data);
         });
     } catch (e) {
       if (e.response.status === 403) {

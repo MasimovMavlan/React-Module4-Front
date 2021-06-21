@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ModalEdit from "../ModalEdit/ModalEdit";
 import ModalRemove from "../ModalRemove/ModalRemove";
-import { useHistory } from "react-router";
-import axios from "axios";
+
 import {
   Button,
   Table,
@@ -15,35 +14,11 @@ import {
 } from "@material-ui/core";
 import "./List.scss";
 
-const List = ({ note, setNote }) => {
+const List = ({ note, setNote, sort, sortDirection, sortNotes }) => {
   const [indexEdit, setIndexEdit] = useState(-1);
   const [indexRemove, setIndexRemove] = useState(-1);
   const [openEdit, setOpenEdit] = useState(false);
   const [openRemove, setOpenRemove] = useState(false);
-  const token = localStorage.getItem("token");
-  const history = useHistory();
-
-  const fetchData = async () => {
-    try {
-      await axios
-        .get("http://localhost:5000/getNote", {
-          headers: { authorization: token },
-        })
-        .then((res) => {
-          setNote(res.data.data);
-        });
-    } catch (e) {
-      if (e.response.status === 403) {
-        localStorage.clear();
-        history.push("/login");
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setNote, token]);
 
   const editElement = (index) => {
     handleOpenEdit();
@@ -63,10 +38,6 @@ const List = ({ note, setNote }) => {
     setOpenRemove(true);
   };
 
-  // note.sort((a, b) =>
-  //   a.isCheck > b.isCheck ? 1 : a.isCheck < b.isCheck ? -1 : 0
-  // );
-
   return (
     <div className="list">
       {openEdit && (
@@ -75,6 +46,9 @@ const List = ({ note, setNote }) => {
           setNote={setNote}
           openEdit={openEdit}
           setOpenEdit={setOpenEdit}
+          sort={sort}
+          sortDirection={sortDirection}
+          sortNotes={sortNotes}
         />
       )}
       {openRemove && (
@@ -96,7 +70,7 @@ const List = ({ note, setNote }) => {
                 Врач
               </TableCell>
               <TableCell className="table-10 table-grey" align="center">
-                Дата(g)
+                Дата
               </TableCell>
               <TableCell className="table-40 table-grey" align="center">
                 Жалоба
@@ -108,7 +82,7 @@ const List = ({ note, setNote }) => {
             </TableRow>
           </TableHead>
           <TableBody className="table-body">
-            {note?.map((list, index) => (
+            {note.map((list, index) => (
               <TableRow key={`list-${index}`}>
                 <TableCell className="table-20 table-border" align="center">
                   {list.patient}

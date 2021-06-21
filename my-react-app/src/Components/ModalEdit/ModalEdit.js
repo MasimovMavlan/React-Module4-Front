@@ -14,7 +14,14 @@ import {
 } from "@material-ui/core";
 import "./ModalEdit.scss";
 
-const ModalEdit = ({ note, setNote, openEdit, setOpenEdit }) => {
+const ModalEdit = ({
+  note,
+  openEdit,
+  setOpenEdit,
+  sort,
+  sortDirection,
+  sortNotes,
+}) => {
   const [tempPatient, setTempPatient] = useState("");
   const [tempDoctor, setTempDoctor] = useState("");
   const [tempDate, setTempDate] = useState("");
@@ -52,7 +59,7 @@ const ModalEdit = ({ note, setNote, openEdit, setOpenEdit }) => {
           }
         )
         .then((res) => {
-          setNote(res.data.data);
+          sortNotes(sort, sortDirection, res.data.data);
         });
     } catch (e) {
       if (e.response.status === 403) {

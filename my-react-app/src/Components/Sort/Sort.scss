@@ -1,0 +1,18 @@
+.sort {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90vw;
+  margin-bottom: 20px;
+
+  .MuiOutlinedInput-root {
+    margin-left: 10px;
+    width: 175px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+}

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import "./Inputs.scss";
 
-const Inputs = ({ setNote }) => {
+const Inputs = ({ sort, sortDirection, sortNotes }) => {
   const today = new Date();
   const day = `0${today.getDate()}`.slice(-2);
   const month = `0${today.getMonth() + 1}`.slice(-2);
@@ -40,7 +40,7 @@ const Inputs = ({ setNote }) => {
             { headers: { authorization: token } }
           )
           .then((res) => {
-            setNote(res.data.data);
+            sortNotes(sort, sortDirection, res.data.data);
             setName("");
             setDoctor("Педрони Эмилио");
             setDate(dat);

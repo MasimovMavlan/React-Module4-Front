@@ -26,7 +26,8 @@ const ModalEdit = ({
   const [tempDoctor, setTempDoctor] = useState("");
   const [tempDate, setTempDate] = useState("");
   const [tempVine, setTempVine] = useState("");
-  const isDisabled = !tempPatient || !tempDoctor || !tempDate || !tempVine;
+  const isDisabled =
+    !tempPatient.trim() || !tempDoctor || !tempDate || !tempVine.trim();
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -43,31 +44,35 @@ const ModalEdit = ({
 
   const handleDoneButton = async () => {
     const { _id } = note;
-    try {
-      await axios
-        .patch(
-          `http://localhost:5000/editNote`,
-          {
-            _id,
-            patient: tempPatient,
-            doctor: tempDoctor,
-            date: tempDate,
-            vine: tempVine,
-          },
-          {
-            headers: { authorization: token },
-          }
-        )
-        .then((res) => {
-          sortNotes(sort, sortDirection, res.data.data);
-        });
-    } catch (e) {
-      if (e.response.status === 403) {
-        localStorage.clear();
-        history.push("/login");
+    if (tempPatient.trim() && tempVine.trim()) {
+      try {
+        await axios
+          .patch(
+            `http://localhost:5000/editNote`,
+            {
+              _id,
+              patient: tempPatient.trim(),
+              doctor: tempDoctor,
+              date: tempDate,
+              vine: tempVine.trim(),
+            },
+            {
+              headers: { authorization: token },
+            }
+          )
+          .then((res) => {
+            sortNotes(sort, sortDirection, res.data.data);
+          });
+      } catch (e) {
+        if (e.response.status === 403) {
+          localStorage.clear();
+          history.push("/login");
+        }
       }
+      handleCloseEdit();
+    } else {
+      alert("Заполните все поля");
     }
-    handleCloseEdit();
   };
 
   const changeTempEdit = (e, setTemp) => {
@@ -124,6 +129,7 @@ const ModalEdit = ({
           <TextareaAutosize
             variant="outlined"
             type="text"
+            rowsMax={7}
             onChange={(e) => changeTempEdit(e, setTempVine)}
             value={tempVine}
           />

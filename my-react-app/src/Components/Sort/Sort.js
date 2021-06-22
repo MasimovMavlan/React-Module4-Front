@@ -2,23 +2,17 @@ import React from "react";
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import "./Sort.scss";
 
-const Sort = ({
-  sort,
-  sortDirection,
-  sortNotes,
-  setSort,
-  setSortDirection,
-  styles,
-  note,
-}) => {
+const Sort = ({ props, setSort, setSortDirection, styles }) => {
+  const { sort, sortDirection, filterSort, filterEnd, filterStart, noteTemp } =
+    props;
   const handleSortChange = (e) => {
     setSort(e.target.value);
-    sortNotes(e.target.value, sortDirection, note);
+    filterSort(e.target.value, sortDirection, filterStart, filterEnd, noteTemp);
   };
 
   const handleSortDirectionChange = (e) => {
     setSortDirection(e.target.value);
-    sortNotes(sort, e.target.value, note);
+    filterSort(sort, e.target.value, filterStart, filterEnd, noteTemp);
   };
 
   const directions = [

@@ -11,7 +11,15 @@ import {
 } from "@material-ui/core";
 import "./Inputs.scss";
 
-const Inputs = ({ sort, sortDirection, sortNotes }) => {
+const Inputs = ({ props }) => {
+  const {
+    setNoteTemp,
+    sort,
+    sortDirection,
+    filterSort,
+    filterEnd,
+    filterStart,
+  } = props;
   const today = new Date();
   const day = `0${today.getDate()}`.slice(-2);
   const month = `0${today.getMonth() + 1}`.slice(-2);
@@ -25,7 +33,7 @@ const Inputs = ({ sort, sortDirection, sortNotes }) => {
   const token = localStorage.getItem("token");
   const history = useHistory();
 
-  const addList = async (text) => {
+  const addList = async () => {
     if (patient.trim() && vine.trim() && date) {
       try {
         await axios
@@ -40,7 +48,14 @@ const Inputs = ({ sort, sortDirection, sortNotes }) => {
             { headers: { authorization: token } }
           )
           .then((res) => {
-            sortNotes(sort, sortDirection, res.data.data);
+            setNoteTemp(res.data.data);
+            filterSort(
+              sort,
+              sortDirection,
+              filterStart,
+              filterEnd,
+              res.data.data
+            );
             setName("");
             setDoctor("Педрони Эмилио");
             setDate(dat);

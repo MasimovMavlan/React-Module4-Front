@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import "./Filter.scss";
 
-const Filter = ({ props, setFilterStart, setFilterEnd }) => {
+const Filter = ({ options, setFilterStart, setFilterEnd }) => {
   const { sort, sortDirection, filterSort, filterEnd, filterStart, noteTemp } =
-    props;
+    options;
   const [filterBlock, setFilterBlock] = useState(true);
 
   const handleFilterStart = (e) => {

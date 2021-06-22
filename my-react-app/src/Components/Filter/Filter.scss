@@ -1,0 +1,46 @@
+.FilterList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  margin-bottom: 20px;
+
+  .MuiButton-contained,
+  .MuiFormControl-root {
+    margin: 10px;
+  }
+
+  .MuiButton-contained,
+  .MuiFormControl-root,
+  .MuiOutlinedInput-root {
+    height: 45px;
+    border-radius: 4px;
+    background-color: white;
+  }
+}
+
+.FilterButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90vw;
+  margin-bottom: 20px;
+
+  .MuiButton-label {
+    font-size: 40px;
+  }
+  .MuiButton-contained {
+    height: 45px;
+    min-width: 45px;
+    padding: 0;
+    background-color: white;
+    margin: 10px;
+  }
+}
+
+@media screen and (max-device-width: 1024px) {
+  .FilterList {
+    flex-direction: column;
+    align-items: center;
+  }
+}

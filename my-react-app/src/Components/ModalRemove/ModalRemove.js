@@ -7,11 +7,11 @@ import { useHistory } from "react-router";
 const ModalRemove = ({
   openRemove,
   setOpenRemove,
-  sort,
-  sortDirection,
-  sortNotes,
-  note,
+  noteRemove,
+  props,
+  setNoteTemp,
 }) => {
+  const { sort, sortDirection, filterSort, filterEnd, filterStart } = props;
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -22,11 +22,18 @@ const ModalRemove = ({
   const removeNote = async () => {
     try {
       await axios
-        .delete(`http://localhost:5000/deleteNote?_id=${note._id}`, {
+        .delete(`http://localhost:5000/deleteNote?_id=${noteRemove._id}`, {
           headers: { authorization: token },
         })
         .then((res) => {
-          sortNotes(sort, sortDirection, res.data.data);
+          setNoteTemp(res.data.data);
+          filterSort(
+            sort,
+            sortDirection,
+            filterStart,
+            filterEnd,
+            res.data.data
+          );
         });
     } catch (e) {
       if (e.response.status === 403) {

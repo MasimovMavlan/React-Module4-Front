@@ -15,13 +15,14 @@ import {
 import "./ModalEdit.scss";
 
 const ModalEdit = ({
+  props,
   note,
   openEdit,
   setOpenEdit,
-  sort,
-  sortDirection,
-  sortNotes,
+  indexEdit,
+  setNoteTemp,
 }) => {
+  const { sort, sortDirection, filterSort, filterEnd, filterStart } = props;
   const [tempPatient, setTempPatient] = useState("");
   const [tempDoctor, setTempDoctor] = useState("");
   const [tempDate, setTempDate] = useState("");
@@ -31,19 +32,19 @@ const ModalEdit = ({
   const token = localStorage.getItem("token");
   const history = useHistory();
 
-  const onModalOpen = async (value) => {
-    setTempPatient(value.patient);
-    setTempDoctor(value.doctor);
-    setTempDate(value.date);
-    setTempVine(value.vine);
-  };
-
   useEffect(() => {
-    onModalOpen(note);
-  }, [note]);
+    const onModalOpen = async () => {
+      setTempPatient(note[indexEdit].patient);
+      setTempDoctor(note[indexEdit].doctor);
+      setTempDate(note[indexEdit].date);
+      setTempVine(note[indexEdit].vine);
+    };
+
+    onModalOpen();
+  }, [indexEdit, note]);
 
   const handleDoneButton = async () => {
-    const { _id } = note;
+    const { _id } = note[indexEdit];
     if (tempPatient.trim() && tempVine.trim()) {
       try {
         await axios
@@ -61,7 +62,14 @@ const ModalEdit = ({
             }
           )
           .then((res) => {
-            sortNotes(sort, sortDirection, res.data.data);
+            setNoteTemp(res.data.data);
+            filterSort(
+              sort,
+              sortDirection,
+              filterStart,
+              filterEnd,
+              res.data.data
+            );
           });
       } catch (e) {
         if (e.response.status === 403) {

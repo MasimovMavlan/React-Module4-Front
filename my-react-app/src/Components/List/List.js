@@ -14,8 +14,8 @@ import {
 } from "@material-ui/core";
 import "./List.scss";
 
-const List = ({ props, note }) => {
-  const { setNoteTemp } = props;
+const List = ({ options, note }) => {
+  const { setNoteTemp } = options;
   const [indexEdit, setIndexEdit] = useState(-1);
   const [indexRemove, setIndexRemove] = useState(-1);
   const [openEdit, setOpenEdit] = useState(false);
@@ -43,7 +43,7 @@ const List = ({ props, note }) => {
     <div className="list">
       {openEdit && (
         <ModalEdit
-          props={props}
+          options={options}
           note={note}
           openEdit={openEdit}
           setOpenEdit={setOpenEdit}
@@ -53,7 +53,7 @@ const List = ({ props, note }) => {
       )}
       {openRemove && (
         <ModalRemove
-          props={props}
+          options={options}
           noteRemove={note[indexRemove]}
           openRemove={openRemove}
           setOpenRemove={setOpenRemove}

@@ -77,7 +77,7 @@ const HomePage = () => {
     setNote(arr);
   };
 
-  const props = {
+  const options = {
     sort,
     sortDirection,
     filterSort,
@@ -89,19 +89,19 @@ const HomePage = () => {
   return (
     <div className="main-body">
       <HomeHeader headerText="Приемы" />
-      <Inputs props={props} />
+      <Inputs options={options} />
       <Sort
-        props={props}
+        options={options}
         setSort={setSort}
         setSortDirection={setSortDirection}
         styles={styles}
       />
       <Filter
-        props={props}
+        options={options}
         setFilterStart={setFilterStart}
         setFilterEnd={setFilterEnd}
       />
-      <List props={props} setNoteTemp={setNoteTemp} note={note} />
+      <List options={options} setNoteTemp={setNoteTemp} note={note} />
     </div>
   );
 };

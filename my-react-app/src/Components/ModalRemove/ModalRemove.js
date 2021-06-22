@@ -8,10 +8,10 @@ const ModalRemove = ({
   openRemove,
   setOpenRemove,
   noteRemove,
-  props,
+  options,
   setNoteTemp,
 }) => {
-  const { sort, sortDirection, filterSort, filterEnd, filterStart } = props;
+  const { sort, sortDirection, filterSort, filterEnd, filterStart } = options;
   const token = localStorage.getItem("token");
   const history = useHistory();
 

@@ -15,14 +15,14 @@ import {
 import "./ModalEdit.scss";
 
 const ModalEdit = ({
-  props,
+  options,
   note,
   openEdit,
   setOpenEdit,
   indexEdit,
   setNoteTemp,
 }) => {
-  const { sort, sortDirection, filterSort, filterEnd, filterStart } = props;
+  const { sort, sortDirection, filterSort, filterEnd, filterStart } = options;
   const [tempPatient, setTempPatient] = useState("");
   const [tempDoctor, setTempDoctor] = useState("");
   const [tempDate, setTempDate] = useState("");

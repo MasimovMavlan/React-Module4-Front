@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import "./Inputs.scss";
 
-const Inputs = ({ props }) => {
+const Inputs = ({ options }) => {
   const {
     setNoteTemp,
     sort,
@@ -19,7 +19,7 @@ const Inputs = ({ props }) => {
     filterSort,
     filterEnd,
     filterStart,
-  } = props;
+  } = options;
   const today = new Date();
   const day = `0${today.getDate()}`.slice(-2);
   const month = `0${today.getMonth() + 1}`.slice(-2);
